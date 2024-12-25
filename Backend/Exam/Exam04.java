@@ -1,39 +1,50 @@
 import java.util.Scanner;
 
 public class Exam04 {
-    public static int exam04() {
+    public static double exam04() {
         Scanner scanner = new Scanner(System.in);
         
         System.out.println("กรุณาใส่คะแนน:");
-        int score = scanner.nextInt();
+        double score = scanner.nextDouble();
         
         System.out.println("\nกระบวนการปัดเศษ:");
         System.out.println("คะแนนเดิม: " + score);
         
-        // กฎการปัดเศษ
-        if (score < 38) {
-            System.out.println("คะแนนน้อยกว่า 38 ไม่ต้องปัดเศษ");
-            return score;
+        // กัดเศษ 2 ตำแหน่ง
+        double roundedScore = Math.round(score * 100.0) / 100.0;
+        System.out.println("ปัดเศษทศนิยม 2 ตำแหน่ง: " + roundedScore);
+        
+        // ถ้าเป็นจำนวนเต็ม ให้แสดงเป็นจำนวนเต็ม
+        if (roundedScore == Math.floor(roundedScore)) {
+            System.out.println("แปลงเป็นจำนวนเต็ม: " + (int)roundedScore);
+            return (int)roundedScore;
         }
         
-        // หาเลขถัดไปที่หารด้วย 5 ลงตัว
-        int nextMultipleOf5 = ((score + 4) / 5) * 5;
-        
-        System.out.println("เลขถัดไปที่หารด้วย 5 ลงตัว: " + nextMultipleOf5);
-        System.out.println("ผลต่าง: " + (nextMultipleOf5 - score));
-        
-        // ถ้าผลต่างน้อยกว่า 3 ให้ปัดขึ้น
-        if (nextMultipleOf5 - score < 3) {
-            System.out.println("ผลต่างน้อยกว่า 3 ปัดขึ้นเป็น: " + nextMultipleOf5);
-            return nextMultipleOf5;
-        } else {
-            System.out.println("ผลต่างมากกว่าหรือเท่ากับ 3 ไม่ต้องปัดเศษ");
-            return score;
-        }
+        return roundedScore;
+    }
+    
+    public static int roundUp(double number) {
+        System.out.println("\nกระบวนการปัดเศษขึ้น:");
+        System.out.println("ตัวเลขเดิม: " + number);
+        int result = (int)Math.ceil(number);
+        System.out.println("ปัดขึ้นเป็น: " + result);
+        return result;
     }
 
     public static void main(String[] args) {
-        int result = exam04();
-        System.out.println("\nคะแนนสุดท้าย: " + result);
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("เลือกฟังก์ชัน (1: ปัดเศษปกติ, 2: ปัดขึ้น):");
+        int choice = scanner.nextInt();
+        
+        if (choice == 1) {
+            double result = exam04();
+            System.out.println("\nคะแนนสุดท้าย: " + result);
+        } else {
+            System.out.println("กรุณาใส่ตัวเลข:");
+            double number = scanner.nextDouble();
+            int result = roundUp(number);
+            System.out.println("\nผลลัพธ์: " + result);
+        }
     }
 }
