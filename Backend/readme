@@ -1,0 +1,213 @@
+1. Quiz: Find the Missing Number
+Question:
+You are given an array of integers from 1 to n in random order, but one number is missing. Write a JavaScript function to find the missing number.
+
+For example, given the array [1, 2, 4, 5, 6], the missing number is 3.
+
+Answer:
+javascript
+Copy code
+function findMissingNumber(arr, n) {
+    // Sum of first n numbers
+    const expectedSum = (n * (n + 1)) / 2;
+    // Sum of numbers in the array
+    const actualSum = arr.reduce((acc, num) => acc + num, 0);
+    
+    // Missing number is the difference between expected sum and actual sum
+    return expectedSum - actualSum;
+}
+
+// Example usage:
+const arr = [1, 2, 4, 5, 6];
+const n = 6;
+console.log(findMissingNumber(arr, n)); // Output: 3
+2. Quiz: Reverse a String Recursively
+Question:
+Write a JavaScript function that reverses a string recursively.
+
+For example, the input "hello" should return "olleh".
+
+Answer:
+javascript
+Copy code
+function reverseString(str) {
+    // Base case: empty string or single character
+    if (str === "") {
+        return str;
+    }
+    // Recursive case: last character + reverse of the rest
+    return reverseString(str.slice(1)) + str[0];
+}
+
+// Example usage:
+console.log(reverseString("hello")); // Output: "olleh"
+3. Quiz: FizzBuzz
+Question:
+Write a JavaScript program that prints numbers from 1 to 100, but:
+
+For multiples of 3, print "Fizz" instead of the number.
+For multiples of 5, print "Buzz" instead of the number.
+For multiples of both 3 and 5, print "FizzBuzz".
+Answer:
+javascript
+Copy code
+for (let i = 1; i <= 100; i++) {
+    if (i % 3 === 0 && i % 5 === 0) {
+        console.log("FizzBuzz");
+    } else if (i % 3 === 0) {
+        console.log("Fizz");
+    } else if (i % 5 === 0) {
+        console.log("Buzz");
+    } else {
+        console.log(i);
+    }
+}
+4. Quiz: Palindrome Check
+Question:
+Write a JavaScript function to check if a given string is a palindrome (reads the same forward and backward).
+
+For example, the input "madam" should return true, while "hello" should return false.
+
+Answer:
+javascript
+Copy code
+function isPalindrome(str) {
+    const cleanedStr = str.toLowerCase().replace(/[^a-z0-9]/g, "");
+    const reversedStr = cleanedStr.split('').reverse().join('');
+    
+    return cleanedStr === reversedStr;
+}
+
+// Example usage:
+console.log(isPalindrome("madam"));  // Output: true
+console.log(isPalindrome("hello"));  // Output: false
+5. Quiz: Sum of Digits
+Question:
+Write a recursive JavaScript function to find the sum of the digits of a given number.
+
+For example, the input 1234 should return 10 (because 1 + 2 + 3 + 4 = 10).
+
+Answer:
+javascript
+Copy code
+function sumOfDigits(num) {
+    // Base case: if the number is a single digit
+    if (num === 0) {
+        return 0;
+    }
+    // Recursive case: last digit + sum of remaining digits
+    return (num % 10) + sumOfDigits(Math.floor(num / 10));
+}
+
+// Example usage:
+console.log(sumOfDigits(1234));  // Output: 10
+6. Quiz: Find the Longest Word
+Question:
+Write a JavaScript function that finds the longest word in a given sentence.
+
+For example, the input "The quick brown fox jumps over the lazy dog" should return "jumps".
+
+Answer:
+javascript
+Copy code
+function findLongestWord(sentence) {
+    const words = sentence.split(' ');
+    let longestWord = "";
+
+    words.forEach((word) => {
+        if (word.length > longestWord.length) {
+            longestWord = word;
+        }
+    });
+
+    return longestWord;
+}
+
+// Example usage:
+console.log(findLongestWord("The quick brown fox jumps over the lazy dog"));  // Output: "jumps"
+7. Quiz: Count Vowels in a String
+Question:
+Write a JavaScript function that counts the number of vowels (a, e, i, o, u) in a given string.
+
+For example, the input "hello world" should return 3 (e, o, o).
+
+Answer:
+javascript
+Copy code
+function countVowels(str) {
+    const vowels = "aeiou";
+    let count = 0;
+
+    for (let char of str.toLowerCase()) {
+        if (vowels.includes(char)) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+// Example usage:
+console.log(countVowels("hello world"));  // Output: 3
+8. Quiz: Factorial Calculation
+Question:
+Write a JavaScript function that computes the factorial of a given number n.
+
+For example, the input 5 should return 120 (because 5! = 5 * 4 * 3 * 2 * 1 = 120).
+
+Answer:
+javascript
+Copy code
+function factorial(n) {
+    // Base case: factorial of 0 or 1 is 1
+    if (n <= 1) {
+        return 1;
+    }
+    // Recursive case: n * factorial of (n-1)
+    return n * factorial(n - 1);
+}
+
+// Example usage:
+console.log(factorial(5));  // Output: 120
+9. Quiz: Flatten an Array
+Question:
+Write a JavaScript function that flattens a nested array of any depth into a single array.
+
+For example, the input [1, [2, [3, [4]], 5]] should return [1, 2, 3, 4, 5].
+
+Answer:
+javascript
+Copy code
+function flattenArray(arr) {
+    return arr.reduce((flat, toFlatten) => {
+        return flat.concat(Array.isArray(toFlatten) ? flattenArray(toFlatten) : toFlatten);
+    }, []);
+}
+
+// Example usage:
+console.log(flattenArray([1, [2, [3, [4]], 5]]));  // Output: [1, 2, 3, 4, 5]
+10. Quiz: Check for Prime Numbers
+Question:
+Write a JavaScript function that checks whether a given number is prime.
+
+For example, the input 7 should return true, while 10 should return false.
+
+Answer:
+javascript
+Copy code
+function isPrime(num) {
+    if (num <= 1) return false;
+    if (num === 2) return true;
+
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+        if (num % i === 0) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+// Example usage:
+console.log(isPrime(7));  // Output: true
+console.log(isPrime(10)); // Output: false
